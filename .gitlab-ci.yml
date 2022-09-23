@@ -1,0 +1,55 @@
+default:
+    image: "python:3.8"
+
+cache:
+    paths:
+        - .venv/
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - echo "Creating environment with Poetry..."
+    - pip install poetry
+    - poetry config virtualenvs.in-project true
+    - poetry install
+
+black:
+  stage: test
+  script:
+    - echo "Running black in check mode..."
+    - source .venv/bin/activate
+    - black --check .
+
+isort:
+  stage: test
+  script:
+    - echo "Running isort in check mode..."
+    - source .venv/bin/activate
+    - isort --check .
+
+mypy:
+  stage: test
+  script:
+    - echo "Running mypy..."
+    - source .venv/bin/activate
+    - mypy .
+
+pytest:
+  stage: test
+  script:
+    - echo "Running pytest..."
+    - source .venv/bin/activate
+    - pytest .
+
+docker-build:
+  stage: deploy
+  image: docker:20.10.14
+  script:
+    - docker build -t ensayo .
+    - docker images
+    - docker run ensayo

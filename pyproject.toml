@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "example"
+version = "0.1.0"
+description = ""
+authors = ["amazzeo <amazzeo.nisum@bancochile.cl>"]
+
+[tool.poetry.scripts]
+example = "example.cli:cli"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+click = "^8.1.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.8.0"
+isort = "^5.10.1"
+mypy = "^0.971"
+pre-commit = "^2.20.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
