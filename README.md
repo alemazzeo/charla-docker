@@ -1,6 +1,6 @@
 # Instrucciones de uso
 
-## Instación mediante Poetry
+## Instalación mediante Poetry
 
 ### Requisito previo: 
 
